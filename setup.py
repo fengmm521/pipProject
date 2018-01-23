@@ -14,12 +14,12 @@ from setuptools import setup, find_packages
 setup(
     name = "magetool",
     version = "0.1.0",
-    keywords = ("pip", "datacanvas", "eds", "xiaoh"),
-    description = "eds sdk",
-    long_description = "eds sdk for python",
+    keywords = ("pip", "pathtool","timetool", "magetool", "mage"),
+    description = "time and path tool",
+    long_description = "time and path tool",
     license = "MIT Licence",
 
-    url = "http://xiaoh.me",
+    url = "https://github.com/fengmm521/pipProject",
     author = "mage",
     author_email = "mage@woodcol.com",
 
