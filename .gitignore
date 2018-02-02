@@ -1,2 +1,6 @@
 
 *.pyc
+
+dist/magetool-0.1.1.tar.gz
+
+magetool.egg-info
