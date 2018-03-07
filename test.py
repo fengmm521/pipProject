@@ -11,8 +11,9 @@
 
 from magetool import pathtool
 from magetool import timetool
+from magetool import NetWorkTest
 
 
-print timetool.getNowDate()
+print(timetool.getNowDate())
 
-print pathtool.getAllExtFile('.','.py')
+print(pathtool.getAllExtFile('.','.py'))

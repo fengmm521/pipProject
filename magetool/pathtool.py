@@ -8,7 +8,14 @@
 import os,sys
 
 import json
-import timetool
+# import timetool
+from . import timetool
+
+if sys.version_info > (3,0):
+    def cmp(a,b):
+        import operator
+        return operator.eq(a,b)
+
 
 #获取脚本路径
 def cur_file_dir():

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import time
 import datetime
+import sys
 # loctim = time.localtime()
 # #time.struct_time(tm_year=2015, tm_mon=8, tm_mday=2, tm_hour=12, tm_min=16, tm_sec=47, tm_wday=6, tm_yday=214, tm_isdst=0)
 # sendmsg = str(loctim.tm_mon) + '_' +  str(loctim.tm_mday) + '_' + str(loctim.tm_hour) + '_' + str(loctim.tm_min) + '_' + str(loctim.tm_sec)
@@ -29,17 +30,29 @@ def datetime2timestamp(dt, convert_to_utc=False):
         if convert_to_utc: # 是否转化为UTC时间
             dt = dt + datetime.timedelta(hours=-8) # 中国默认时区
         timestamp = datetime.timedelta.total_seconds(dt - datetime.datetime(1970,1,1))
-        return long(timestamp)
+        
+        if sys.version_info > (3,1):
+            return int(timestamp)
+        elif sys.version_info <= (2,7):
+            return long(timestamp)
     return dt
 
 def timestamp2datetime(timestamp, convert_to_local=False):
     ''' Converts UNIX timestamp to a datetime object. '''
-    if isinstance(timestamp, (int, long, float)):
-        dt = datetime.datetime.utcfromtimestamp(timestamp)
-        if convert_to_local: # 是否转化为本地时间
-            dt = dt + datetime.timedelta(hours=8) # 中国默认时区
-        return dt
-    return timestamp
+    if sys.version_info > (3,1):
+        if isinstance(timestamp, (int, int, float)):
+            dt = datetime.datetime.utcfromtimestamp(timestamp)
+            if convert_to_local: # 是否转化为本地时间
+                dt = dt + datetime.timedelta(hours=8) # 中国默认时区
+            return dt
+        return timestamp
+    elif sys.version_info <= (2,7):
+        if isinstance(timestamp, (int, long, float)):
+            dt = datetime.datetime.utcfromtimestamp(timestamp)
+            if convert_to_local: # 是否转化为本地时间
+                dt = dt + datetime.timedelta(hours=8) # 中国默认时区
+            return dt
+        return timestamp
 
 def timestamp_utc_now():
     return datetime2timestamp(datetime.datetime.utcnow())
