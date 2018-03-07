@@ -71,4 +71,4 @@ if __name__ == '__main__':
     v1 = [2.4,3.3,4.2,8.1]
     v2 = [1,2,1,4]
     v = subList(v1, v2)
-    print v
+    print(v)

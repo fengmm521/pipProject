@@ -125,6 +125,6 @@ if __name__ == '__main__':
     # print timestamp_utc_now()
     # print timestamp2datetime(int(time.time()),True)
     tmpdat = '2017_7_17'
-    print getDateDaysFromOneDate(tmpdat)
+    print(getDateDaysFromOneDate(tmpdat))
     # outstr = timestamp2datetime(int(time.time() + 60 * 5),True)
     # print outstr

@@ -9,7 +9,7 @@ def conventStrTOUtf8(oldstr):
         nstr = oldstr.encode("utf-8")
         return nstr
     except Exception as e:
-        print 'nstr do not encode utf-8'
+        print('nstr do not encode utf-8')
     cnstrtype = chardet.detect(oldstr)['encoding']
     utf8str =  oldstr.decode(cnstrtype).encode('utf-8')
     return utf8str
@@ -23,7 +23,7 @@ def getUrl(purl):
         html = conventStrTOUtf8(res.read())
         return html
     except Exception, e:
-        print e
+        print(e)
     return None
 
 if __name__ == '__main__':

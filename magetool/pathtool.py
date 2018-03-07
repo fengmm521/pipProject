@@ -100,8 +100,8 @@ def finddir(arg,dirname,filenames):
     name,text = os.path.split(dirname)
     dirnametmp = str(dirname)
     if text and text[0] == '.':
-        print dirname
-        print filenames
+        print(dirname)
+        print(filenames)
         os.system('rm -r %s'%(dirname))
         return
     elif filenames:
@@ -111,7 +111,7 @@ def finddir(arg,dirname,filenames):
                 if f.find(' '):
                     nf = f.replace(' ','\ ')
                     fpthtmp = dirname + nf
-                print dirname + f
+                print(dirname + f)
                 os.system('rm  %s'%(fpthtmp))
 
 #删除所有pth目录下的所有"."开头的文件名和目录名
@@ -140,7 +140,7 @@ def makeDir(outpth,ndir):
         tmpdir = outpth + ndir
     else:
         tmpdir = outpth + '/' + ndir
-    print tmpdir
+    print(tmpdir)
     if not os.path.exists(tmpdir):
         os.mkdir(tmpdir)
 
@@ -168,7 +168,7 @@ def replaceFileName(path,sname,replaceStr,tostr):
     outpath = path + tmpname
     oldpath = path + sname
     cmd = "mv %s %s"%(oldpath,outpath)
-    print cmd
+    print(cmd)
     os.system("mv %s %s"%(oldpath,outpath))
 
 # 替换目录下的文件名中某个字符串为其他字符串
