@@ -16,6 +16,16 @@ class DBMObj(object):
         db[key] = value
         db.close()
 
+    def insetList(self,keys,values):
+        if len(keys) == len(values):
+            db = dbm.open(self.dbpth, 'c')
+            for i in range(len(keys)):
+                db[keys[i]] = values[i]
+            db.close()
+            return True
+        else:
+            return False
+
     def delet(self,key):
         db = dbm.open(self.dbpth, 'c')
         if key in db:
