@@ -201,6 +201,12 @@ class prpcrypt():
         text = rsa.decrypt(dmsg, self.gprivate_pem)
         return text
 
+    def enbase64(self,msg):
+        dmsg = base64.b64encode(msg)
+        return dmsg
+    def debase64(self,msg):
+        dmsg = base64.b64decode(msg)
+        return dmsg
     #使用本地私钥签名消息
     def signWithGhostPriKey(self,msg):
         tmpmsg = msg
@@ -214,10 +220,15 @@ class prpcrypt():
         if sys.version_info > (3,0):
             tmpmsg = msg.encode()
         dmsg = tmpmsg
-        if isBase64In:
-            dmsg = base64.b64decode(msg)
-        vermsg = rsa.verify(dmsg, sign, self.gpublic_pem)
-        return vermsg
+        
+        try:
+            if isBase64In:
+                dmsg = base64.b64decode(msg)
+            vermsg = rsa.verify(dmsg, sign, self.gpublic_pem)
+            return vermsg
+        except Exception as e:
+            return False
+        
 
     #使用本地公钥验证签名    
     def verifyWithPubKey(self,msg,sign,pubpemkey,isBase64In = True):
@@ -239,6 +250,12 @@ if __name__ == '__main__':
     pmsg = pc.encryptWithGhostPubKey(msg)
     omsg = pc.decryptWithGhostPriKey(pmsg)
 
+    smsg = pc.signWithGhostPriKey(msg)
+    b64msg = pc.enbase64(msg)
+    vmsg = pc.verifyWithGhostPubKey(b64msg, smsg)
+
     print('msg--->',msg)
     print('pmsg-->',pmsg)
     print('omsg-->',omsg)
+    print('smg-->',smsg)
+    print('vmsg-->',vmsg)
