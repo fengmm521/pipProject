@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import urllib2
 import chardet
+import requests
 
 
 def conventStrTOUtf8(oldstr):
@@ -14,15 +15,27 @@ def conventStrTOUtf8(oldstr):
     utf8str =  oldstr.decode(cnstrtype).encode('utf-8')
     return utf8str
 
+def postDataToURL(purl,data):
+    if purl[0:5] == 'https':
+        response = requests.post(purl,data=data,verify=False)
+        dat = response.text
+        return dat
+    else:
+        response = requests.post(purl,data=data)
+        dat = response.text
+        return dat
 
 def getUrl(purl):
     try:
-        req = urllib2.Request(purl)
-        req.add_header('User-agent', 'Mozilla 5.10')
-        res = urllib2.urlopen(req)
-        html = conventStrTOUtf8(res.read())
-        return html
-    except Exception, e:
+        if purl[0:5] == 'https':
+            res = requests.get(self.purl, verify=False)
+            print(res.text)
+            return res.text
+        else:
+            res = requests.get(self.purl)
+            print(res.text)
+            return res.text
+    except Exception as e:
         print(e)
     return None
 
