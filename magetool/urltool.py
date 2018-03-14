@@ -28,11 +28,11 @@ def postDataToURL(purl,data):
 def getUrl(purl):
     try:
         if purl[0:5] == 'https':
-            res = requests.get(self.purl, verify=False)
+            res = requests.get(purl, verify=False)
             print(res.text)
             return res.text
         else:
-            res = requests.get(self.purl)
+            res = requests.get(purl)
             print(res.text)
             return res.text
     except Exception as e:

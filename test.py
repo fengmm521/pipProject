@@ -1,19 +1,39 @@
-#!/usr/bin/env python
-#-*- coding:utf-8 -*-
-
-#############################################
-# File Name: setup.py
-# Author: xingming
-# Mail: huoxingming@gmail.com
-# Created Time:  2015-12-11 01:25:34 AM
-#############################################
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#用于访问OKCOIN 期货REST API
 
 
-from magetool import pathtool
+import time
+import datetime
 from magetool import timetool
-from magetool import NetWorkTest
 
 
-print(timetool.getNowDate())
+def main():
+    utc = "2018-03-14T13:40:00.000Z"
+    # print(timetool.utcStrTimeToTime(utc))
+    print(timetool.utcStrTimeToTime(utc))
+    print(timetool.utcStrToLocalTimeStr(utc))
+    # datetime.datetime(2014, 9, 18, 10, 42, 16)
 
-print(pathtool.getAllExtFile('.','.py'))
+# def test():
+
+#     dt = '2018-03-14T13:40:00.000Z'
+#     timeArray = time.strptime(dt, "%Y-%m-%dT%H:%M:%S.%f")
+#     print(timeArray)
+#     timestamp = timetool.datetime2timestamp(timeArray)
+#     print(timetool.datetime2timestamp(timeArray))
+#     print(timetool.timestamp2datetime(timestamp))
+
+#     timestamp = time.time()
+#     timestruct = time.localtime(timestamp)
+#     print(time.strftime('%Y-%m-%d %H:%M:%S', timestruct)) # 2016-12-22 10:49:57
+#     time.utcfromtimestamp(timestamp)
+
+
+if __name__ == '__main__':
+    main()
+
+
+
+
+    

@@ -24,6 +24,8 @@ import sys
 # print time.localtime(time.time() + 60 *3)
 
 
+
+
 def datetime2timestamp(dt, convert_to_utc=False):
     ''' Converts a datetime object to UNIX timestamp in milliseconds. '''
     if isinstance(dt, datetime.datetime):
@@ -132,6 +134,40 @@ def getDateDaysFromOneDate(startDate):
     return outdays
     # timetmp = time.struct_time(tm_year=toyear, tm_mon=tomon, tm_mday=today, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=0, tm_yday=0, tm_isdst=0)
     # print timetmp
+
+
+
+#UTC时间转本地时间
+def utc2local(utc_st):
+    '''UTC时间转本地时间（+8:00）'''
+    now_stamp = time.time()
+    local_time = datetime.datetime.fromtimestamp(now_stamp)
+    utc_time = datetime.datetime.utcfromtimestamp(now_stamp)
+    offset = local_time - utc_time
+    local_st = utc_st + offset
+    return local_st
+
+
+#本地时间转UTC时间
+def local2utc(local_st):
+    '''本地时间转UTC时间（-8:00）'''
+    time_struct = time.mktime(local_st.timetuple())
+    utc_st = datetime.datetime.utcfromtimestamp(time_struct)
+    return utc_st
+
+#UTC格式的时间转换为本地时间
+def utcStrToLocalTimeStr(tstr,UTC_FORMAT='%Y-%m-%dT%H:%M:%S.%fZ'):
+    t1 = datetime.datetime.strptime(tstr, UTC_FORMAT)
+    lt1 = utc2local(t1)
+    return lt1.strftime("%Y-%m-%d %H:%M:%S")
+
+def utcStrTimeToTime(tstr,UTC_FORMAT='%Y-%m-%dT%H:%M:%S.%fZ'):
+    ldate = utcStrToLocalTimeStr(tstr,UTC_FORMAT)
+    timeArray = time.strptime(ldate, "%Y-%m-%d %H:%M:%S")
+    #转换成时间戳
+    timestamp = time.mktime(timeArray)
+    return timestamp
+    
 
 if __name__ == '__main__':
     # print datetime.datetime.utcnow()
