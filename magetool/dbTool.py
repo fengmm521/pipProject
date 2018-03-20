@@ -77,8 +77,6 @@ class DBMObj(object):
         out = None
         if key in db:
             out = db[key]
-            
-
         db.close()
         return out
 
