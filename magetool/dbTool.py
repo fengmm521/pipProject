@@ -3,6 +3,7 @@
 # @Date    : 2017-02-22 09:44:42
 
 import dbm
+import json
 
 dbpth = './db/keysdb'
 
@@ -39,19 +40,28 @@ class DBMObj(object):
 
     def select(self,key):
         db = dbm.open(self.dbpth, 'c')
+        out = None
         if key in db:
-            return db[key]
-        else:
-            return None
+            out = db[key]
         db.close()
+        return out
 
     def allKeys(self):
         db = dbm.open(self.dbpth, 'c')
-        return db.keys() 
+        keys = db.keys()
         db.close()
-
+        return keys
+        
+    def getDBDatas(self):
+        db = dbm.open(self.dbpth, 'c')
+        data = {}
+        for k in db.keys():
+            data[k] = json.loads(db[k])
+        db.close()
+        return data
 def main():
     tobj = DBMObj(dbpth)
+    print(tobj)
     print(tobj.allKeys())
     tobj.inset('mykey2', '111')
     print(tobj.select('mykey'))
