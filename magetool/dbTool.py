@@ -4,6 +4,7 @@
 
 import dbm
 import json
+import time
 
 dbpth = './db/keysdb'
 
@@ -11,18 +12,39 @@ class DBMObj(object):
     """docstring for ClassName"""
     def __init__(self, pth):
         self.dbpth = pth
+        self.dbtimepth = pth + 'time'
 
     def inset(self,key,value):
         db = dbm.open(self.dbpth, 'c')
         db[key] = value
         db.close()
+        tdb = dbm.open(self.dbtimepth, 'c')
+        if key in tdb:
+            timedic = json.loads(tdb[key])
+            timedic['last'] = int(time.time())
+            tdb[key] = json.dumps(timedic)
+        else:
+            timedic = {'create':int(time.time()),'last':int(time.time())}
+            tdb[key] = json.dumps(timedic)
+        tdb.close()
 
     def insetList(self,keys,values):
         if len(keys) == len(values):
             db = dbm.open(self.dbpth, 'c')
+            tdb = dbm.open(self.dbtimepth, 'c')
             for i in range(len(keys)):
                 db[keys[i]] = values[i]
+                key = keys[i]
+                if keys[i] in tdb:
+                    timedic = json.loads(tdb[key])
+                    timedic['last'] = int(time.time())
+                    tdb[key] = json.dumps(timedic)
+                else:
+                    timedic = {'create':int(time.time()),'last':int(time.time())}
+                    tdb[key] = json.dumps(timedic)
+            tdb.close()
             db.close()
+
             return True
         else:
             return False
@@ -31,18 +53,32 @@ class DBMObj(object):
         db = dbm.open(self.dbpth, 'c')
         if key in db:
             del db[key]
+            tdb = dbm.open(self.dbtimepth, 'c')
+            del tdb[key]
+            tdb.close()
         db.close()
 
     def update(self,key,value):
         db = dbm.open(self.dbpth, 'c')
         db[key] = value
         db.close()
+        tdb = dbm.open(self.dbtimepth, 'c')
+        if key in tdb:
+            timedic = json.loads(tdb[key])
+            timedic['last'] = int(time.time())
+            tdb[key] = json.dumps(timedic)
+        else:
+            timedic = {'create':int(time.time()),'last':int(time.time())}
+            tdb[key] = json.dumps(timedic)
+        tdb.close()
 
     def select(self,key):
         db = dbm.open(self.dbpth, 'c')
         out = None
         if key in db:
             out = db[key]
+            
+
         db.close()
         return out
 
