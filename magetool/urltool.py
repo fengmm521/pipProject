@@ -29,11 +29,11 @@ def getUrl(purl):
     try:
         if purl[0:5] == 'https':
             res = requests.get(purl, verify=False)
-            print(res.text)
+            # print(res.text)
             return res.text
         else:
             res = requests.get(purl)
-            print(res.text)
+            # print(res.text)
             return res.text
     except Exception as e:
         print(e)
