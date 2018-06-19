@@ -168,12 +168,20 @@ def utcStrTimeToTime(tstr,UTC_FORMAT='%Y-%m-%dT%H:%M:%S.%fZ'):
     timestamp = time.mktime(timeArray)
     return timestamp
     
+def strTimeToTime(tstr,FORMAT='%Y%m%d%H%M%S'):
+    timeArray = time.strptime(tstr, FORMAT)
+    #转换成时间戳
+    timestamp = time.mktime(timeArray)
+    return timestamp
 
 if __name__ == '__main__':
     # print datetime.datetime.utcnow()
     # print timestamp_utc_now()
-    # print timestamp2datetime(int(time.time()),True)
-    tmpdat = '2017_7_17'
-    print(getDateDaysFromOneDate(tmpdat))
+    print timestamp2datetime(int(time.time()),True)
+
+    print(getNowDate())
+
+    # tmpdat = '2017_7_17'
+    # print(getDateDaysFromOneDate(tmpdat))
     # outstr = timestamp2datetime(int(time.time() + 60 * 5),True)
     # print outstr
