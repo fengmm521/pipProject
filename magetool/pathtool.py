@@ -39,6 +39,10 @@ def GetParentPath(strPath):
     lsPath = os.path.split(lsPath[0]);
     return lsPath[0];
 
+#for python3
+def cmp(a,b):
+    return ((a>b)-(a<b))
+
 #获取目录下的所有类型文件
 def getAllExtFile(pth,fromatx = ".erl"):
     jsondir = pth
