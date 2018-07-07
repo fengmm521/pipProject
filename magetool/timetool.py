@@ -41,14 +41,14 @@ def datetime2timestamp(dt, convert_to_utc=False):
 
 def timestamp2datetime(timestamp, convert_to_local=False):
     ''' Converts UNIX timestamp to a datetime object. '''
-    if sys.version_info > (3,1):
+    if sys.version_info.major >= 3 and sys.version_info.minor >= 1:
         if isinstance(timestamp, (int, int, float)):
             dt = datetime.datetime.utcfromtimestamp(timestamp)
             if convert_to_local: # 是否转化为本地时间
                 dt = dt + datetime.timedelta(hours=8) # 中国默认时区
             return dt
         return timestamp
-    elif sys.version_info <= (2,7):
+    else:
         if isinstance(timestamp, (int, long, float)):
             dt = datetime.datetime.utcfromtimestamp(timestamp)
             if convert_to_local: # 是否转化为本地时间

@@ -39,6 +39,16 @@ def saveListWithLineTxt(datas,txtpth):
     f.write(ostr)
     f.close()
 
+#获取A在B中的数量和坐标位置
+def getAinBList(A,B):
+    X = [A==B[i:i+len(A)] for i in range(0,len(B)-len(A)+1)]
+    return X
+
+#判断listB中是否包含A
+def isAinB(A,B):
+    # a = any([A==B[i:i+len(A)] for i in range(0,len(B)-len(A)+1)])
+    X = [A==B[i:i+len(A)] for i in range(0,len(B)-len(A)+1)]
+    return any(X)
 #获取多维数组中的某一维数据，组成一个新数组
 def getMutlListWithIndex(datas,idx = 0):
     vtmp = [x[idx] for x in datas]
@@ -72,3 +82,8 @@ if __name__ == '__main__':
     v2 = [1,2,1,4]
     v = subList(v1, v2)
     print(v)
+
+    A = [4,6]
+    B = [1,2,3,4,6,7,9]
+    res = getAinBList(A, B)
+    print(res)
