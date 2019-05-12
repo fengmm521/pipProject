@@ -13,8 +13,8 @@ from setuptools import setup, find_packages
 
 setup(
     name = "magetool",
-    version = "0.1.26",
-    keywords = ("pip", "pathtool","timetool", "magetool", "mage"),
+    version = "0.1.29",
+    keywords = ("pathtool","timetool", "magetool", "mage"),
     description = "time and path tool",
     long_description = "time and path tool",
     license = "MIT Licence",

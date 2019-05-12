@@ -177,7 +177,7 @@ def strTimeToTime(tstr,FORMAT='%Y%m%d%H%M%S'):
 if __name__ == '__main__':
     # print datetime.datetime.utcnow()
     # print timestamp_utc_now()
-    print timestamp2datetime(int(time.time()),True)
+    print(timestamp2datetime(int(time.time()),True))
 
     print(getNowDate())
 

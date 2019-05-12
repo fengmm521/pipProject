@@ -13,12 +13,12 @@ datatool = None
 class TestHTTPHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
-        # print self.path
-        # print self.client_address
+        print self.path
+        print self.client_address
         global datatool
         try:
             if self.path[0:3] != '/bitmex':
-                jobj = {'a':1,'b':2}
+                jobj = {'value':1}
                 jstr = json.dumps(jobj)
                 self.sendJsonMsg(jstr)
                 return None
@@ -36,6 +36,44 @@ class TestHTTPHandler(BaseHTTPRequestHandler):
         self.send_header("Content-Length", str(length))
         self.end_headers()
         self.wfile.write(jmsg)
+    def do_POST(self):
+
+
+        dictmp = self.do_GET()
+
+
+        # length = self.headers.getheader('content-length');
+        print(self.headers.headers())
+
+
+
+        """Serve a POST request."""
+        # form = cgi.FieldStorage(
+        #     fp=self.rfile,
+        #     headers=self.headers,
+        #     environ={'REQUEST_METHOD': 'POST',
+        #              'CONTENT_TYPE': self.headers['Content-Type'],
+        #              })
+        # filename = form['file'].filename
+        # print filename
+        # path = self.translate_path(self.path)
+        # print path
+        # filepath = os.path.join(path, filename)
+        # print filepath
+        # if os.path.exists(filepath):
+        #     self.log_error('File %s exist!', filename)
+        #     filepath += '.new'
+
+        # with open(filepath, 'wb') as f:
+        #     f.write(form['file'].value)
+
+        
+
+    def do_HEAD(self):
+        """Serve a HEAD request."""
+        f = self.send_head()
+        if f:
+            f.close()
 
 def runHttpServer(port,objtool):
     global datatool
@@ -54,8 +92,8 @@ def main():
     start_server(8889)
 
     while True:
-        time.sleep(2)
-        print('sleep2')
+        time.sleep(10)
+        # print('sleep2')
 
 if __name__ == '__main__':
     main()
