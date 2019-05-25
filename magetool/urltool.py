@@ -39,5 +39,22 @@ def getUrl(purl):
         print(e)
     return None
 
+def getUrlWithChrome(purl):
+    rurl = purl
+    try:
+        s = requests.Session()
+        s.headers.update({'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'})
+        if purl[0:5] == 'https':
+            res = s.get(rurl,verify=False)
+            # print(res.text)
+            return res.text
+        else:
+            res = requests.get(purl)
+            # print(res.text)
+            return res.text
+    except Exception as e:
+        print(e)
+    return None
+
 if __name__ == '__main__':
     pass

@@ -13,7 +13,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "magetool",
-    version = "0.1.31",
+    version = "0.1.34",
     keywords = ("pathtool","timetool", "magetool", "mage"),
     description = "time and path tool",
     long_description = "time and path tool",
@@ -26,5 +26,5 @@ setup(
     packages = find_packages(),
     include_package_data = True,
     platforms = "any",
-    install_requires = ['chardet']
+    install_requires = ['chardet','sympy']
 )
