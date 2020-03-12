@@ -13,7 +13,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "magetool",
-    version = "0.1.36",
+    version = "0.1.38",
     keywords = ("pathtool","timetool", "magetool", "mage"),
     description = "time and path tool",
     long_description = "time and path tool",

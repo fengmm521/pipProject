@@ -72,12 +72,19 @@ def getDateDay():
     sendmsg = str(loctim.tm_year) + '_' + str(loctim.tm_mon) + '_' +  str(loctim.tm_mday)
     return sendmsg
 
-#日期转为时间戳
+
+#时间戳转为时间结构体
 def getDateStructWithSec(t):
     tmp = time.localtime(int(t))
     return tmp
 
-#时间戳转为时间结构体
+#时间戳转为字符串时间
+def conventTimesampToDate(ptime):
+    loctim = getDateStructWithSec(ptime)
+    outstr = str(loctim.tm_year) + '.' + str(loctim.tm_mon) + '.' +  str(loctim.tm_mday)+ ' ' +  str(loctim.tm_hour)+ ':' +  str(loctim.tm_min)+ ':' +  str(loctim.tm_sec)
+    return outstr
+
+#结构体转为时间戳
 def makeSecTimeWithStructTime(structtime):
     timetmp = time.mktime(structtime)
     return timetmp
@@ -174,13 +181,42 @@ def strTimeToTime(tstr,FORMAT='%Y%m%d%H%M%S'):
     timestamp = time.mktime(timeArray)
     return timestamp
 
+#时间戳转utc时间结构体
+def utcSructTimeWithTime(dt):
+    return time.gmtime(dt)
+
+def conventTimeFromStrConfig(pstr):
+    dats = pstr.split("|")
+    if len(dats) == 1:#说明是时间定义的是今天的这个时间
+        today = getDateDay() + '|' + dats[0]
+        times = today.split('!')
+        ptime = strTimeToTime(times[0],FORMAT = '%Y_%m_%d|%H:%M:%S')#2020-01-13|12:03:25
+        outtime = ptime + float(times[1])/1000.0
+        return outtime
+
+    elif len(dats) != 2:
+        print("时间格式错误")
+    else:
+        #定义是某一天的时间，在这里返回时间戳
+        times = pstr.split('!')
+        ptime = strTimeToTime(times[0],FORMAT = '%Y-%m-%d|%H:%M:%S')#2020-01-13|12:03:25
+        outtime = ptime + float(times[1])/1000.0
+        return outtime
+
+
 if __name__ == '__main__':
     # print datetime.datetime.utcnow()
     # print timestamp_utc_now()
-    print(timestamp2datetime(int(time.time()),True))
+    print(timestamp2datetime(int(time.time()),False))
 
     print(getNowDate())
+    print(time.gmtime())
+    print(time.localtime())
 
+    x = conventTimeFromStrConfig('2020-01-13|12:03:25!000')
+    print(x)
+    print(time.localtime(int(x)))
+    print(time.time())
     # tmpdat = '2017_7_17'
     # print(getDateDaysFromOneDate(tmpdat))
     # outstr = timestamp2datetime(int(time.time() + 60 * 5),True)
