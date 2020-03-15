@@ -1,9 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import urllib2
+# import urllib2
 import chardet
 import requests
+from urllib import parse
 
+def urldecode(purl):
+    return parse.unquote(purl)
+def urlencode(purl):
+    return parse.quote(purl)
 
 def conventStrTOUtf8(oldstr):
     try:
