@@ -261,6 +261,8 @@ if __name__ == '__main__':
     print(x)
     print(time.localtime(int(x)))
     print(time.time())
+    iostime = timestamp2iso(int(time.time()))
+    print(iostime)
     # tmpdat = '2017_7_17'
     # print(getDateDaysFromOneDate(tmpdat))
     # outstr = timestamp2datetime(int(time.time() + 60 * 5),True)
