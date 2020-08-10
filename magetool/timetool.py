@@ -253,7 +253,8 @@ if __name__ == '__main__':
     # print timestamp_utc_now()
     print(timestamp2datetime(int(time.time()),False))
 
-    print(getNowDate())
+    dx = getNowDate()
+    print(dx,type(dx))
     print(time.gmtime())
     print(time.localtime())
 
@@ -263,6 +264,10 @@ if __name__ == '__main__':
     print(time.time())
     iostime = timestamp2iso(int(time.time()))
     print(iostime)
+
+    testdat = '2020-08-10 22:18:59'
+    t = strTimeToTime(str(dx),FORMAT='%Y-%m-%d %H:%M:%S')
+    print(t)
     # tmpdat = '2017_7_17'
     # print(getDateDaysFromOneDate(tmpdat))
     # outstr = timestamp2datetime(int(time.time() + 60 * 5),True)
