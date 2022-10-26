@@ -195,10 +195,17 @@ def renameDir(sdir,replacestr,tostr,exittype):
 
 
 def getFileNameFromPath(fpth):
-    tmp = fname.split('/')[-1]
+    tmp = fpth.split('/')[-1]
     fname = tmp.split('.')[0]
     return fname
-
+    
+def copyfile(spth,tpth):
+    f = open(spth,'rb')
+    dat = f.read()
+    f.close()
+    f = open(tpth,'wb')
+    f.write(dat)
+    f.close()
 
 
 def main():

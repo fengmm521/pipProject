@@ -258,16 +258,17 @@ if __name__ == '__main__':
     print(time.gmtime())
     print(time.localtime())
 
-    x = conventTimeFromStrConfig('2020-01-13|12:03:25!000')
+    x = conventTimeFromStrConfig('2020-02-28|12:03:25!000')
     print(x)
     print(time.localtime(int(x)))
     print(time.time())
     iostime = timestamp2iso(int(time.time()))
     print(iostime)
 
-    testdat = '2020-08-10 22:18:59'
+    testdat = '2022-08-26 10:39:03'
     t = strTimeToTime(str(dx),FORMAT='%Y-%m-%d %H:%M:%S')
     print(t)
+    print(timestamp2datetime(int(t),False))
     # tmpdat = '2017_7_17'
     # print(getDateDaysFromOneDate(tmpdat))
     # outstr = timestamp2datetime(int(time.time() + 60 * 5),True)
